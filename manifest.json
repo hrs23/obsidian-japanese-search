@@ -1,0 +1,10 @@
+{
+	"id": "japanese-search",
+	"name": "Japanese Search",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "Enhanced search for Japanese text with romaji input support.",
+	"author": "hiroshi",
+	"authorUrl": "",
+	"isDesktopOnly": false
+}
