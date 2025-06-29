@@ -1,94 +1,84 @@
-# Obsidian Sample Plugin
+# Obsidian Japanese Search Plugin
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+Enhanced Japanese text search for Obsidian with romaji input support.
 
-This project uses TypeScript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in TypeScript Definition format, which contains TSDoc comments describing what it does.
+## Features
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open Sample Modal" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+- **Romaji Search**: Search Japanese text (kanji, hiragana, katakana) using romaji input
+- **Multiple Romanization Systems**: Supports both Hepburn and Kunrei styles (e.g., "shi"/"si" → し)
+- **All Kanji Readings**: Searches through all possible readings (on'yomi and kun'yomi)
+- **Partial Matching**: Find results with partial input
+- **Accurate Highlighting**: Highlights only the matched characters
 
-## First time developing plugins?
+## Usage
 
-Quick starting guide for new plugin devs:
+Press `Ctrl/Cmd + J` to open Japanese Search.
 
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+### Search Examples
 
-## Releasing new releases
+| Input | Matches | Highlighted | Notes |
+|-------|---------|-------------|-------|
+| yama | 山田太郎 | 山 | Matches 山 (yama) |
+| toukyou | 東京都 | 東、京 | Standard romanization |
+| tokyo | 東京都 | ❌ | Incorrect romanization |
+| gakkou | 学校 | 学、校 | With long vowel |
+| si | 新聞 | 新 | Kunrei style (si = shi) |
+| ti | 地図 | 地 | ti matches 地 (chi) |
+| n | 中村 | 中 | Single character search |
 
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
-- Publish the release.
+### Supported Input Methods
 
-> You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
-> The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
+- **Romaji**: yama, sakura, nihon
+- **Hiragana**: やま, さくら, にほん
+- **Katakana**: ヤマ, サクラ, ニホン
+- **Kanji**: Direct kanji search works too
 
-## Adding your plugin to the community plugin list
+## Installation
 
-- Check the [plugin guidelines](https://docs.obsidian.md/Plugins/Releasing/Plugin+guidelines).
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
+### Manual Installation
 
-## How to use
+1. Download the latest release
+2. Extract `main.js`, `manifest.json`, and `styles.css`
+3. Copy to your vault's `.obsidian/plugins/japanese-search/` folder
+4. Enable the plugin in Settings → Community plugins
 
-- Clone this repo.
-- Make sure your NodeJS is at least v16 (`node --version`).
-- `npm i` or `yarn` to install dependencies.
-- `npm run dev` to start compilation in watch mode.
+## License
 
-## Manually installing the plugin
+MIT
 
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
+---
 
-## Improve code quality with eslint (optional)
-- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code. 
-- To use eslint with this project, make sure to install eslint from terminal:
-  - `npm install -g eslint`
-- To use eslint to analyze this project use this command:
-  - `eslint main.ts`
-  - eslint will then create a report with suggestions for code improvement by file and line number.
-- If your source code is in a folder, such as `src`, you can use eslint with this command to analyze all files in that folder:
-  - `eslint .\src\`
+# 日本語版
 
-## Funding URL
+Obsidianで日本語検索を強化するプラグイン。ローマ字で漢字を検索できます。
 
-You can include funding URLs where people who use your plugin can financially support it.
+## 主な機能
 
-The simple way is to set the `fundingUrl` field to your link in your `manifest.json` file:
+- **ローマ字検索**: ローマ字入力で漢字・ひらがな・カタカナを検索
+- **複数の入力方式**: ヘボン式・訓令式の両方に対応（例：「shi」「si」→ し）
+- **全読みパターン対応**: 漢字の音読み・訓読みすべてに対応
+- **部分マッチ**: 入力の一部がマッチすれば検索結果に表示
+- **正確なハイライト**: マッチした文字だけを正確にハイライト
 
-```json
-{
-    "fundingUrl": "https://buymeacoffee.com"
-}
-```
+## 使い方
 
-If you have multiple URLs, you can also do:
+`Ctrl/Cmd + J` で日本語検索を開きます。
 
-```json
-{
-    "fundingUrl": {
-        "Buy Me a Coffee": "https://buymeacoffee.com",
-        "GitHub Sponsor": "https://github.com/sponsors",
-        "Patreon": "https://www.patreon.com/"
-    }
-}
-```
+### 検索例
 
-## API Documentation
+| 入力 | マッチ例 | ハイライト部分 | 説明 |
+|------|----------|--------------|------|
+| yama | 山田太郎 | 山 | 「山」の読み「やま」にマッチ |
+| toukyou | 東京都 | 東、京 | 標準的なローマ字 |
+| tokyo | 東京都 | ❌ | 誤ったローマ字（マッチしない） |
+| gakkou | 学校 | 学、校 | 長音付き |
+| si | 新聞 | 新 | 訓令式（si = し） |
+| ti | 地図 | 地 | 「地」の音読み「チ」にマッチ |
+| n | 中村 | 中 | 1文字でも検索可能 |
 
-See https://github.com/obsidianmd/obsidian-api
+### 対応する入力方法
+
+- **ローマ字**: yama, sakura, nihon
+- **ひらがな**: やま、さくら、にほん
+- **カタカナ**: ヤマ、サクラ、ニホン
+- **漢字**: 直接漢字での検索も可能
